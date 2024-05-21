@@ -1,0 +1,15 @@
+easier
+ibis-framework[postgres]
+ipython
+jupyter
+jupyterlab
+numpy
+pandas
+pandera
+pdbpp
+pgcli
+pip
+psycopg2
+pyarrow
+python-dateutil
+scipy
