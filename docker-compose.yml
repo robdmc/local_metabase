@@ -1,0 +1,53 @@
+version: "3.9"
+# docker run  -p 3000:3000 --platform linux/amd64 --name metabase metabase/metabase
+services:
+  base_no_env: &base_no_env
+    image: "robdmc/local_metabase:latest"
+    links:
+      - db
+    volumes:
+      - ./code:/code
+      - env:/env
+    working_dir: /code
+
+  base: &base
+    <<: *base_no_env
+    env_file: variables.env
+
+  shell:
+    <<: *base
+    command: /bin/bash
+
+  make_db:
+    <<: *base
+    entrypoint: /code/make_db.sh
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  host_db:
+    image: alpine/socat:latest
+    command: tcp-listen:5532,fork,reuseaddr tcp-connect:host.docker.internal:5432
+    networks:
+      - default
+
+  metabase:
+    image: "metabase/metabase"
+    platform: linux/amd64
+    ports:
+      - 3000:3000
+    env_file: variables.env
+    links:
+      - db
+      - host_db
+
+volumes:
+  db-data:
+    driver: local
+  env:
+    driver: local
