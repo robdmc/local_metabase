@@ -46,6 +46,21 @@ services:
       - db
       - host_db
 
+  backup:
+    <<: *base
+    entrypoint: /code/backup.sh
+    env_file: variables.env
+  # metabase_backup:
+  #   image: "metabase/metabase"
+  #   platform: linux/amd64
+  #   ports:
+  #     - 3000:3000
+  #   env_file: variables.env
+  #   links:
+  #     - db
+  #     - host_db
+  #   command: export rob & -s
+
 volumes:
   db-data:
     driver: local

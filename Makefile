@@ -26,6 +26,10 @@ create_db: ## Creates the working dataqbase
 metabase: ## Start metabase server
 	docker compose run --service-ports --rm  metabase
 
+.PHONY: backup
+backup: ## Backup the metabase database
+	docker compose run --rm  metabase_backup
+
 .PHONY: metabase_daemon
 metabase_daemon: ## Start metabase server as a daemon
 	docker compose up -d metabase
