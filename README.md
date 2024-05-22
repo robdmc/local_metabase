@@ -12,17 +12,27 @@ make help
 
 ## How do I
 * Install and get started
-  `make bootstrap`
+  ```
+  make bootstrap
+  ```
 
 * Run metabase
-  `make metabase`
+  ```
+  make metabase
+  ```
 
 * Run metabase in daemon mode
-  `make metabase_daemon`
+  ```
+  make metabase_daemon
+  ```
 
 * Dump a backup of the internal metabase state (backup your queries)
-  `make backup`
+  ```
+  make backup
+  ```
 
 * Restore your metabase state from backup file
-  `make restore`
+  ```
+  make restore
+  ```
   
