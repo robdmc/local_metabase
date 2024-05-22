@@ -1,5 +1,4 @@
 version: "3.9"
-# docker run  -p 3000:3000 --platform linux/amd64 --name metabase metabase/metabase
 services:
   base_no_env: &base_no_env
     image: "robdmc/local_metabase:latest"
