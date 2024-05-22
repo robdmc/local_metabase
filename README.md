@@ -6,7 +6,7 @@ You can also point it to any other database you'd like.
 
 ## Commands you can run
 To see everything you can do run:
-```bash
+```
 make help
 ```
 
