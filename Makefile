@@ -28,7 +28,11 @@ metabase: ## Start metabase server
 
 .PHONY: backup
 backup: ## Backup the metabase database
-	docker compose run --rm  metabase_backup
+	docker compose run --rm  backup
+
+.PHONY: restore
+restore: ## Restore the metabase database
+	docker compose run --rm  restore
 
 .PHONY: metabase_daemon
 metabase_daemon: ## Start metabase server as a daemon

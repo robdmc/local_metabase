@@ -7,6 +7,7 @@ services:
       - db
     volumes:
       - ./code:/code
+      - ./metabase_backup:/backup
       - env:/env
     working_dir: /code
 
@@ -50,16 +51,11 @@ services:
     <<: *base
     entrypoint: /code/backup.sh
     env_file: variables.env
-  # metabase_backup:
-  #   image: "metabase/metabase"
-  #   platform: linux/amd64
-  #   ports:
-  #     - 3000:3000
-  #   env_file: variables.env
-  #   links:
-  #     - db
-  #     - host_db
-  #   command: export rob & -s
+
+  restore:
+    <<: *base
+    entrypoint: /code/restore.sh
+    env_file: variables.env
 
 volumes:
   db-data:
