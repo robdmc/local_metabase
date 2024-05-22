@@ -21,6 +21,13 @@ make help
   make metabase
   ```
 
+* Blow away and recover from backup file.
+  ```
+  make nuke
+  make bootstrap
+  make restore
+  ```
+
 * Run metabase in daemon mode
   ```
   make metabase_daemon
