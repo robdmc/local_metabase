@@ -6,6 +6,7 @@ services:
       - db
     volumes:
       - ./code:/code
+      - ./duckdb_database_files:/db_files
       - ./metabase_backup:/backup
       - env:/env
     working_dir: /code
@@ -37,14 +38,18 @@ services:
       - default
 
   metabase:
-    image: "metabase/metabase"
-    platform: linux/amd64
+    # image: "metabase/metabase"
+    image: "robdmc/metabase"
+    # platform: linux/amd64
     ports:
       - 3000:3000
     env_file: variables.env
     links:
       - db
       - host_db
+    volumes:
+      # - ./metabase_duckdb_driver/duckdb.metabase-driver.jar:/plugins/duckdb.metabase-driver.jar
+      - ./duckdb_database_files:/db_files
 
   backup:
     <<: *base

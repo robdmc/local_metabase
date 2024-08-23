@@ -42,6 +42,12 @@ metabase_daemon: ## Start metabase server as a daemon
 down: ## stop all docker-compose services
 	docker-compose down
 
+.PHONY: download_duckdb_driver
+download_duckdb_driver: ## Download the duckdb driver
+	mkdir -p ./metabase_duckdb_driver
+	# You may need to check for updated drivers at https://github.com/MotherDuck-Open-Source/metabase_duckdb_driver
+	wget -P ./metabase_duckdb_driver https://github.com/MotherDuck-Open-Source/metabase_duckdb_driver/releases/download/0.2.9/duckdb.metabase-driver.jar
+
 .PHONY: bootstrap
 bootstrap: ## Delete all project resources and rebuild them
 	# stop serverses and blow away all docker resources
@@ -50,10 +56,15 @@ bootstrap: ## Delete all project resources and rebuild them
 	-docker volume rm local_metabase_env
 	-docker images | grep 'local_metabase' | awk '{print $3}'  | xargs docker rmi
 	-docker builder prune -f
-	#
+	-rm ./metabase_duckdb_driver/*
+	# Download the duckdb driver
+	mkdir -p ./metabase_duckdb_driver
+	wget -P ./metabase_duckdb_driver https://github.com/MotherDuck-Open-Source/metabase_duckdb_driver/releases/download/0.2.9/duckdb.metabase-driver.jar
+
 	# Build the docker container
 	docker rmi -f robdmc/local_metabase
 	docker build -t  robdmc/local_metabase .
+	docker build -t  robdmc/metabase ./metabase_docker
 	#
 	# Create the working database
 	docker-compose run --rm make_db

@@ -19,8 +19,13 @@ RUN apt-get install -y postgresql-client-15
 RUN ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime
 
 RUN apt-get update && \
-apt-get install -y vim && \
-apt-get install -y locales locales-all && \
-apt-get install -y cmake
-# pip install -U pip && \
-# pip install --no-cache-dir -r requirements.txt
+    apt-get install -y vim && \
+    apt-get install -y locales locales-all && \
+    apt-get install -y cmake
+
+RUN pip install -U pip && \
+    pip install click && \
+    pip install pandas && \
+    pip install easier && \
+    pip install click && \
+    pip install duckdb
