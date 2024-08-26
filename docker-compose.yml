@@ -8,7 +8,7 @@ services:
       - ./code:/code
       - ./duckdb_database_files:/db_files
       - ./metabase_backup:/backup
-      - env:/env
+      - ./data:/data
     working_dir: /code
 
   base: &base
@@ -50,6 +50,7 @@ services:
     volumes:
       # - ./metabase_duckdb_driver/duckdb.metabase-driver.jar:/plugins/duckdb.metabase-driver.jar
       - ./duckdb_database_files:/db_files
+      - ./data:/data
 
   backup:
     <<: *base

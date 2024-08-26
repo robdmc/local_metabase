@@ -13,6 +13,10 @@ build: ## Build docker images locally and don't send to dockerhub
 	docker rmi -f robdmc/local_metabase
 	docker build -t  robdmc/local_metabase .
 
+.PHONY: data_link_instructions
+data_link_instructions: ## Print instructions on how to link data files to the container
+	@echo "To link data files to the container, you can use the following command:"
+	@echo "cp -lR /path/to/your/data/on/host ./data"
 
 .PHONY: shell
 shell: ## Open a shell in the container
