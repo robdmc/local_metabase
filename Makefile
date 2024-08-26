@@ -15,8 +15,12 @@ build: ## Build docker images locally and don't send to dockerhub
 
 .PHONY: data_link_instructions
 data_link_instructions: ## Print instructions on how to link data files to the container
-	@echo "To link data files to the container, you can use the following command:"
+	@echo ""
+	@echo "You should probably just copy your data files to the  ./data directory"
+	@echo "But if you don't want to, you can create recursive hard-links with the command:"
+	@echo ""
 	@echo "cp -lR /path/to/your/data/on/host ./data"
+	@echo ""
 
 .PHONY: shell
 shell: ## Open a shell in the container
